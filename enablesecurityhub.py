@@ -111,9 +111,9 @@ def check_config(session,account, region, s3_bucket_name):
             return False
     # Check if default bucket name is available.
     try:
-        s3.list_objects(Bucket='config-bucket-{}'.format(account), MaxKeys=1)
+        s3.list_objects(Bucket='config-bucket-sh-{}'.format(account), MaxKeys=1)
         default_bucket_exists = True
-        s3_bucket_name = 'config-bucket-{}'.format(account)
+        s3_bucket_name = 'config-bucket-sh-{}'.format(account)
     except ClientError as e:
         if e.response['ResponseMetadata']['HTTPStatusCode'] == 404:
             default_bucket_avail = True
@@ -272,7 +272,7 @@ if __name__ == '__main__':
         try:
             session = assume_role(account, args.assume_role)
             # Generate unique bucket name for Config delivery channel if default is not avaialable.
-            s3_bucket_name = 'config-bucket-{}-{}'.format(''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(5)), account)
+            s3_bucket_name = 'config-bucket-sh-{}-{}'.format(''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(5)), account)
             
             for aws_region in securityhub_regions:
                 print('Beginning {account} in {region}'.format(
