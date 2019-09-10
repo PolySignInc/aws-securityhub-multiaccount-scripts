@@ -49,7 +49,7 @@ def assume_role(aws_account_number, role_name):
             aws_account_number,
             role_name
         ),
-        RoleSessionName='EnableSecurityHub'
+        RoleSessionName='ManageSecurityHub'
     )
     
     # Storing STS credentials
@@ -117,7 +117,7 @@ def check_config(session,account, region, s3_bucket_name):
     except ClientError as e:
         if e.response['ResponseMetadata']['HTTPStatusCode'] == 404:
             default_bucket_avail = True
-            s3_bucket_name = 'config-bucket-{}'.format(account)
+            s3_bucket_name = 'config-bucket-sh-{}'.format(account)
         pass
     if not len(config.describe_configuration_recorders()['ConfigurationRecorders']):
         config.put_configuration_recorder( ConfigurationRecorder={'name':'default','roleARN': 'arn:aws:iam::%s:role/aws-service-role/config.amazonaws.com/AWSServiceRoleForConfig' % account,'recordingGroup': {'allSupported' : True, 'includeGlobalResourceTypes': True}})

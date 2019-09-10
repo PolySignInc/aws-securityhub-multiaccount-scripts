@@ -1,3 +1,11 @@
+## Custom setup for Polysign
+ * step 0: create iam role with policy (Ref: ManageSecurityHub in dev, security aws accounts)
+ * step 1: pip3 install virtual env
+ * step 2: install boto3 for python2.7 locally
+ * step 3: have required aws access key id , secre access key for target (master account - security account which consumes logs from various accounts)
+ * step 4: cd into the aws-securityhub-multiaccount-scripts
+ * step 5: why virtualenv (aws scripts support 2.7 right now.)
+
 ## AWS Security Hub Multiaccount Scripts
 
 These scripts automate the process of enabling and disabling AWS Security Hub simultaneously across a group of AWS accounts that are in your control. (Note, that you can have one master account and up to a 1000 member accounts).
